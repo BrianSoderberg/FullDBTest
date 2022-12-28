@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Unity WebGL Player | FullDBTest</title>
-  </head>
-  <body style="text-align: center; padding: 0; border: 0; margin: 0;">
-      <canvas id="unity-canvas" width=960 height=600 tabindex="-1" style="width: 960px; height: 600px; background: #231F20"></canvas>
-      <script src="Build/FullDBTest.loader.js"></script>
+</head>
+<body style="margin: 0; overflow:hidden; background: #000000">
+    <canvas id="unity-canvas" width=window.innerWidth height=window.innerHeight style="width: 100%; height: 100%; background: #000000"></canvas>
+    <script src="Build/FullDBTest.loader.js"></script>
 
-      <script>
+    <script>
+        function OnResize() {
+            window.unityInstance.SendMessage("FirebaseMgr", "SetWidth", window.innerWidth);
+            window.unityInstance.SendMessage("FirebaseMgr", "SetHeight", window.innerHeight);
+            window.unityInstance.SendMessage("FirebaseMgr", "OnResize");
+        }
+    </script>
 
+    <script>
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
         // Mobile device style: fill the whole browser client area with the game canvas:
         var meta = document.createElement('meta');
@@ -40,46 +47,38 @@
 
           window.unityInstance = unityInstance;
 
+            gameInstance = unityInstance;
+
+          window.unityInstance.SendMessage("FirebaseMgr", "SetWidth", window.innerWidth);
+          window.unityInstance.SendMessage("FirebaseMgr", "SetHeight", window.innerHeight);
+          window.unityInstance.SendMessage("FirebaseMgr", "OnResize");
+
       }).catch((message) => {
           alert(message);
       });
-      </script>
-      // was 9.15.0
-      <script src="https://www.gstatic.com/firebasejs/9.14.0/firebase-app-compat.js"></script>
-      <script src="https://www.gstatic.com/firebasejs/9.14.0/firebase-database-compat.js"></script>
-      <script src="https://www.gstatic.com/firebasejs/9.14.0/firebase-auth-compat.js"></script>
 
-      <script type="module">
-          // Import the functions you need from the SDKs you need
-          //import { initializeApp } from "./firebase/app";
-          //import { getDatabase } from "./firebase/database";
+      var gameInstance = null;
 
-          //     import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.14.0/firebase-app-compat.js';
-          //     import { getDatabase } from 'https://www.gstatic.com/firebasejs/9.14.0/firebase-database-compat.js';
+      window.addEventListener("resize", OnResize);
 
-          //import { getAuth } from 'https://www.gstatic.com/firebasejs/9.14.0/firebase-auth-compat.js';
+    </script>
 
-          // TODO: Add SDKs for Firebase products that you want to use
-          // https://firebase.google.com/docs/web/setup#available-libraries
+    <script src="https://www.gstatic.com/firebasejs/9.14.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.14.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.14.0/firebase-auth-compat.js"></script>
 
-          // Your web app's Firebase configuration
-          const firebaseApp = firebase.initializeApp({
-              apiKey: "AIzaSyDBjfXZtnwuWXrnPz9D1M8Nwn2briTfyPE",
-              authDomain: "databasetest-e21e5.firebaseapp.com",
-              databaseURL: "https://databasetest-e21e5-default-rtdb.firebaseio.com",
-              projectId: "databasetest-e21e5",
-              storageBucket: "databasetest-e21e5.appspot.com",
-              messagingSenderId: "348247227276",
-              appId: "1:348247227276:web:9f76cb27ef091ab02834a9"
-          });
+    <script type="module">
+        // Your web app's Firebase configuration
+        const firebaseApp = firebase.initializeApp({
+            apiKey: "AIzaSyCQ6dERTwD4IAxPIHcBmmXRt-WaTPUhgP8",
+            authDomain: "cards3d-e85fb.firebaseapp.com",
+            databaseURL: "https://cards3d-e85fb-default-rtdb.firebaseio.com",
+            projectId: "cards3d-e85fb",
+            storageBucket: "cards3d-e85fb.appspot.com",
+            messagingSenderId: "1073941212794",
+            appId: "1:1073941212794:web:0c563fd6285e08dcee95c3"
+        });
+    </script>
 
-          // Initialize Firebase
-          //    const app = firebase.initializeApp(firebaseConfig);
-          // const db = getDatabase(firebaseApp);
-          //const auth = getAuth(firebaseApp);
-         //const database = getDatabase(app);
-
-      </script>
-
-  </body>
+</body>
 </html>
